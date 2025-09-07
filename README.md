@@ -315,7 +315,7 @@ We welcome contributions from the community! Here's how you can help:
 
 ```bash
 # 1. Fork the repository
-git fork https://github.com/your-org/rwa-marketplace
+git fork https://github.com/lugondev/rwa-example-privy.io
 
 # 2. Create feature branch
 git checkout -b feature/amazing-feature
@@ -414,8 +414,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 📞 Getting Help
 
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/your-org/rwa-marketplace/issues)
-- **💡 Feature Requests**: [GitHub Discussions](https://github.com/your-org/rwa-marketplace/discussions)
+- **🐛 Bug Reports**: [GitHub Issues](https://github.com/lugondev/rwa-example-privy.io/issues)
+- **💡 Feature Requests**: [GitHub Discussions](https://github.com/lugondev/rwa-example-privy.io/discussions)
 - **📖 Documentation**: [API Docs](./docs/api.md) • [Smart Contracts](./docs/contracts.md) • [Deployment Guide](./docs/deployment.md)
 - **💬 Community Support**: [Discord](https://discord.gg/rwa-marketplace) • [Telegram](https://t.me/rwa_marketplace)
 
@@ -480,7 +480,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 <div align="center">
-  <h2>🚀 Built with ❤️ by the RWA Marketplace Team</h2>
+  <h2>🚀 Built with ❤️ by Lugon Team</h2>
   
   <img src="https://img.shields.io/badge/Made%20with-Next.js-black?style=for-the-badge&logo=next.js" alt="Made with Next.js" />
   <img src="https://img.shields.io/badge/Powered%20by-Blockchain-blue?style=for-the-badge&logo=ethereum" alt="Powered by Blockchain" />
@@ -494,13 +494,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   
   <br/><br/>
   
-  <a href="https://github.com/your-org/rwa-marketplace">
-    <img src="https://img.shields.io/github/stars/your-org/rwa-marketplace?style=social" alt="GitHub Stars" />
+  <a href="https://github.com/lugondev/rwa-example-privy.io">
+    <img src="https://img.shields.io/github/stars/lugondev/rwa-example-privy.io?style=social" alt="GitHub Stars" />
   </a>
-  <a href="https://github.com/your-org/rwa-marketplace">
-    <img src="https://img.shields.io/github/forks/your-org/rwa-marketplace?style=social" alt="GitHub Forks" />
+  <a href="https://github.com/lugondev/rwa-example-privy.io">
+    <img src="https://img.shields.io/github/forks/lugondev/rwa-example-privy.io?style=social" alt="GitHub Forks" />
   </a>
-  <a href="https://github.com/your-org/rwa-marketplace">
-    <img src="https://img.shields.io/github/watchers/your-org/rwa-marketplace?style=social" alt="GitHub Watchers" />
+  <a href="https://github.com/lugondev/rwa-example-privy.io">
+    <img src="https://img.shields.io/github/watchers/lugondev/rwa-example-privy.io?style=social" alt="GitHub Watchers" />
   </a>
 </div>
