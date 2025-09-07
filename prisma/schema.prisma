@@ -1,0 +1,324 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model for authentication and compliance
+model User {
+  id               String   @id @default(cuid())
+  walletAddress    String   @unique
+  email            String?  @unique
+  kycStatus        String   @default("pending") // pending, approved, rejected
+  complianceStatus String   @default("pending") // pending, compliant, non_compliant
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  ownedAssets         Asset[]              @relation("AssetOwner")
+  managedVaults       Vault[]              @relation("VaultManager")
+  fractionalOwnerships FractionalOwnership[]
+  profile              UserProfile?
+  kycSubmissions       KycSubmission[]
+  assetTrades          AssetTrade[]
+  orders              Order[]
+  buyerTrades         Trade[]              @relation("BuyerTrades")
+  sellerTrades        Trade[]              @relation("SellerTrades")
+  lendingPositions     LendingPosition[]
+  vaultTracking        VaultTracking[]
+  notifications        Notification[]
+
+  @@map("users")
+}
+
+// Vault model for secure asset storage
+model Vault {
+  id            String   @id @default(cuid())
+  name          String
+  description   String?
+  location      String
+  securityLevel String   // basic, enhanced, premium
+  capacity      Int      // maximum number of assets
+  currentAssets Int      @default(0)
+  managerId     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  manager User    @relation("VaultManager", fields: [managerId], references: [id])
+  assets  Asset[]
+  vaultTracking VaultTracking[]
+
+  @@map("vaults")
+}
+
+// Asset model for real-world assets
+model Asset {
+  id                String   @id @default(cuid())
+  name              String
+  description       String?
+  assetType         String   // real_estate, art, collectibles, commodities
+  totalValue        Float
+  currentPrice      Float
+  fractionalEnabled Boolean  @default(false)
+  vaultId           String?
+  ownerId           String
+  metadata          Json?    // Additional asset-specific data
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  owner               User                  @relation("AssetOwner", fields: [ownerId], references: [id])
+  vault               Vault?                @relation(fields: [vaultId], references: [id])
+  fractionalOwnerships FractionalOwnership[]
+  lendingPools        LendingPool[]
+  oraclePrices        OraclePrice[]
+  assetTrades         AssetTrade[]
+  orders              Order[]
+  trades              Trade[]
+
+  @@map("assets")
+}
+
+// Fractional ownership model
+model FractionalOwnership {
+  id            String   @id @default(cuid())
+  assetId       String
+  ownerId       String
+  shares        Int      // Number of shares owned
+  totalShares   Int      // Total shares for this asset
+  purchasePrice Float
+  createdAt     DateTime @default(now())
+
+  // Relations
+  asset Asset @relation(fields: [assetId], references: [id])
+  owner User  @relation(fields: [ownerId], references: [id])
+
+  @@unique([assetId, ownerId])
+  @@map("fractional_ownership")
+}
+
+// Lending pool model for asset-backed lending
+model LendingPool {
+  id               String   @id @default(cuid())
+  name             String
+  assetId          String
+  totalLiquidity   Float
+  interestRate     Float // Annual interest rate as decimal
+  collateralRatio  Float // Required collateral ratio
+  status           String   @default("active") // active, paused, closed
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  asset Asset @relation(fields: [assetId], references: [id])
+  positions LendingPosition[]
+
+  @@map("lending_pools")
+}
+
+// Oracle price model for asset valuation
+model OraclePrice {
+  id        String   @id @default(cuid())
+  assetId   String
+  price     Float
+  source    String   // oracle provider name
+  timestamp DateTime
+  createdAt DateTime @default(now())
+
+  // Relations
+  asset Asset @relation(fields: [assetId], references: [id])
+
+  @@map("oracle_prices")
+}
+
+// User Profile and KYC Models
+model UserProfile {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  firstName       String?
+  lastName        String?
+  dateOfBirth     DateTime?
+  phoneNumber     String?
+  address         String?
+  city            String?
+  country         String?
+  postalCode      String?
+  profileImage    String?
+  bio             String?
+  investorType    String?   @default("retail") // retail, accredited, institutional
+  riskTolerance   String?   @default("medium") // low, medium, high
+  investmentGoals String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profiles")
+}
+
+model KycSubmission {
+  id                String    @id @default(cuid())
+  userId            String
+  submissionType    String    // identity, address, income, accreditation
+  status            String    @default("pending") // pending, approved, rejected, expired
+  documentType      String    // passport, drivers_license, utility_bill, bank_statement
+  documentNumber    String?
+  issuingCountry    String?
+  expiryDate        DateTime?
+  personalInfo      Json?
+  documentUrl       String?
+  documentHash      String?
+  submittedAt       DateTime  @default(now())
+  reviewedAt        DateTime?
+  reviewedBy        String?
+  reviewNotes       String?
+  rejectionReason   String?
+  expiresAt         DateTime?
+  metadata          Json?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  documents         KycDocument[]
+
+  @@map("kyc_submissions")
+}
+
+model KycDocument {
+  id            String    @id @default(cuid())
+  submissionId  String
+  documentType  String    // document_front, document_back, selfie, proof_of_address
+  fileName      String
+  fileSize      Int
+  mimeType      String
+  fileUrl       String
+  uploadedAt    DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  submission    KycSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@map("kyc_documents")
+}
+
+// Trading Order model
+model Order {
+  id            String    @id @default(cuid())
+  userId        String
+  assetId       String
+  orderType     String    // buy, sell
+  orderStatus   String    @default("pending") // pending, partial, completed, cancelled
+  quantity      Float
+  pricePerShare Float
+  totalValue    Float
+  filledQuantity Float   @default(0)
+  remainingQuantity Float
+  expiresAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  asset         Asset     @relation(fields: [assetId], references: [id])
+  trades        Trade[]
+
+  @@map("orders")
+}
+
+// Trade execution model
+model Trade {
+  id            String    @id @default(cuid())
+  orderId       String?
+  buyerId       String
+  sellerId      String
+  assetId       String
+  quantity      Float
+  pricePerShare Float
+  totalValue    Float
+  transactionHash String?
+  executedAt    DateTime  @default(now())
+  createdAt     DateTime  @default(now())
+  order         Order?    @relation(fields: [orderId], references: [id])
+  buyer         User      @relation("BuyerTrades", fields: [buyerId], references: [id])
+  seller        User      @relation("SellerTrades", fields: [sellerId], references: [id])
+  asset         Asset     @relation(fields: [assetId], references: [id])
+
+  @@map("trades")
+}
+
+model AssetTrade {
+  id            String    @id @default(cuid())
+  userId        String
+  assetId       String
+  tradeType     String    // buy, sell
+  quantity      Float
+  pricePerToken Float
+  totalAmount   Float
+  status        String    @default("pending") // pending, completed, failed, cancelled
+  transactionHash String?
+  executedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  asset         Asset     @relation(fields: [assetId], references: [id])
+
+  @@map("asset_trades")
+}
+
+model LendingPosition {
+  id              String    @id @default(cuid())
+  userId          String
+  poolId          String
+  positionType    String    // lender, borrower
+  amount          Float
+  interestRate    Float
+  duration        Int       // in days
+  status          String    @default("active") // active, completed, defaulted
+  startDate       DateTime  @default(now())
+  endDate         DateTime
+  actualEndDate   DateTime?
+  totalInterest   Float     @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pool            LendingPool @relation(fields: [poolId], references: [id])
+
+  @@map("lending_positions")
+}
+
+model VaultTracking {
+  id              String    @id @default(cuid())
+  userId          String
+  vaultId         String
+  action          String    // deposit, withdraw, claim_rewards
+  amount          Float
+  tokenPrice      Float
+  totalValue      Float
+  transactionHash String?
+  timestamp       DateTime  @default(now())
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vault           Vault     @relation(fields: [vaultId], references: [id])
+
+  @@map("vault_tracking")
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  type      String    // kyc_update, trade_executed, vault_reward, system_alert
+  title     String
+  message   String
+  isRead    Boolean   @default(false)
+  priority  String    @default("normal") // low, normal, high, urgent
+  metadata  Json?
+  createdAt DateTime  @default(now())
+  readAt    DateTime?
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
