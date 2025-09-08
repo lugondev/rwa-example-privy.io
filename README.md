@@ -12,7 +12,7 @@
 
 A comprehensive marketplace for tokenizing, trading, and managing Real World Assets (RWAs) built with Next.js 14, TypeScript, and modern Web3 technologies.
 
-> ⚠️ **QUAN TRỌNG**: Project này hiện đang ở giai đoạn Proof of Concept (POC). Mặc dù có đầy đủ cấu trúc và UI components, nhưng nhiều tính năng core vẫn đang được phát triển và chưa thể chạy production được.</div>
+> ⚠️ **IMPORTANT**: This project is currently in the Proof of Concept (POC) phase. Although it has a complete structure and UI components, many core features are still under development and it is not production-ready.</div>
 
 ## 📸 Screenshots
 
@@ -40,82 +40,82 @@ A comprehensive marketplace for tokenizing, trading, and managing Real World Ass
   <img src="https://img.shields.io/badge/Not%20Ready-Production-red?style=for-the-badge" alt="Not Production Ready" />
 </div>
 
-> ⚠️ **Lưu ý quan trọng**: Đây hiện tại chỉ là một Proof of Concept (POC) và chưa thể chạy được hoàn toàn. Nhiều tính năng vẫn đang được phát triển và cần hoàn thiện.
+> ⚠️ **Important Note**: This is currently just a Proof of Concept (POC) and is not fully runnable. Many features are still under development and need to be completed.
 
-## ✅ Checklist - Đã Hoàn Thành
+## ✅ Checklist - Completed
 
-### 🏗️ Cơ Sở Hạ Tầng
-- [x] Setup Next.js 14 với TypeScript
-- [x] Cấu hình Tailwind CSS và styling system
-- [x] Tích hợp Prisma ORM với PostgreSQL schema
-- [x] Cấu hình Privy authentication framework
-- [x] Setup cấu trúc thư mục theo Clean Architecture
-- [x] Thiết kế database schema đầy đủ cho RWA platform
+### 🏗️ Infrastructure
+- [x] Setup Next.js 14 with TypeScript
+- [x] Configure Tailwind CSS and styling system
+- [x] Integrate Prisma ORM with PostgreSQL schema
+- [x] Configure Privy authentication framework
+- [x] Setup directory structure according to Clean Architecture
+- [x] Design complete database schema for RWA platform
 
 ### 🎨 UI/UX Components
 - [x] Layout components (Navigation, Footer, AppLayout)
-- [x] AssetGrid component với mock data
-- [x] StatsSection với dashboard metrics
+- [x] AssetGrid component with mock data
+- [x] StatsSection with dashboard metrics
 - [x] Authentication components (ConnectWalletButton, AuthGuard)
 - [x] KYC components (DocumentUpload, ProfileForm, ComplianceChecks)
 - [x] Basic responsive design
 - [x] 3D Asset Viewer component structure
 
 ### 📊 Data Layer
-- [x] Prisma schema cho toàn bộ platform
+- [x] Prisma schema for the entire platform
 - [x] User, Asset, Vault, Trading models
 - [x] KYC/AML compliance models
-- [x] Lending và fractional ownership models
-- [x] Mock API endpoints cho development
+- [x] Lending and fractional ownership models
+- [x] Mock API endpoints for development
 
 ### 🔗 Web3 Integration Foundation
 - [x] Web3 providers configuration (Ethereum, Polygon, XDC, Algorand)
-- [x] Basic wallet connection structure với Privy
+- [x] Basic wallet connection structure with Privy
 - [x] Blockchain configuration files
 - [x] Multi-chain support framework
 
-## 📋 TODO List - Cần Hoàn Thành
+## 📋 TODO List - To Be Completed
 
-### 🔴 Critical Priority (Cần làm ngay)
+### 🔴 Critical Priority (Immediate Action Required)
 
 #### Database & Backend
 - [ ] **Setup PostgreSQL database production**
-  - [ ] Tạo database instance
-  - [ ] Chạy Prisma migrations
+  - [ ] Create database instance
+  - [ ] Run Prisma migrations
   - [ ] Seed initial data
   - [ ] Test database connections
   - [ ] Configure connection pooling
 
 #### Authentication & Security
-- [ ] **Hoàn thiện Privy integration**
-  - [ ] Cấu hình Privy app credentials thực tế
+- [ ] **Complete Privy integration**
+  - [ ] Configure actual Privy app credentials
   - [ ] Implement user session management
   - [ ] Complete wallet authentication flow
-  - [ ] User profile creation và update
+  - [ ] User profile creation and update
   - [ ] Role-based access control (RBAC)
 
 #### Core API Development
 - [ ] **Implement real API endpoints**
-  - [ ] Replace mock data với database queries
-  - [ ] Error handling và validation comprehensive
-  - [ ] API rate limiting và security
+  - [ ] Replace mock data with database queries
+  - [ ] Comprehensive error handling and validation
+  - [ ] API rate limiting and security
   - [ ] Response caching strategies
-  - [ ] API documentation với OpenAPI
+  - [ ] API documentation with OpenAPI
 
-### 🟡 High Priority (Quan trọng)
+### 🟡 High Priority (Important)
 
 #### Smart Contracts Development
 - [ ] **Asset tokenization contracts**
-  - [ ] ERC-1155 cho fractional ownership
+  - [ ] ERC-1155 for fractional ownership
   - [ ] Asset registry contract
-  - [ ] Trading contract với escrow functionality
+  - [ ] Trading contract with escrow functionality
   - [ ] Price oracle integration contracts
   - [ ] Governance contracts
 
 #### KYC/Compliance System
 - [ ] **Identity verification system**
-  - [ ] Document upload và processing
-  - [ ] ID verification với third-party services
+  - [ ] Document upload and processing
+  - [ ] ID verification with third-party services
   - [ ] AML screening integration
   - [ ] Compliance status tracking
   - [ ] Regulatory reporting tools
@@ -125,15 +125,15 @@ A comprehensive marketplace for tokenizing, trading, and managing Real World Ass
   - [ ] Order book implementation
   - [ ] Matching engine algorithms
   - [ ] Transaction settlement mechanisms
-  - [ ] Fee calculation và distribution
+  - [ ] Fee calculation and distribution
   - [ ] Slippage protection
 
-### 🟢 Medium Priority (Có thể làm sau)
+### 🟢 Medium Priority (Can be done later)
 
 #### Vault Management System
 - [ ] **Physical asset tracking**
   - [ ] Vault registration system
-  - [ ] Asset custody tracking với IoT
+  - [ ] Asset custody tracking with IoT
   - [ ] Insurance integration APIs
   - [ ] Audit trail logging system
   - [ ] Security monitoring dashboard
@@ -141,8 +141,8 @@ A comprehensive marketplace for tokenizing, trading, and managing Real World Ass
 #### Analytics & Reporting
 - [ ] **Real-time price tracking**
   - [ ] Price oracle connections (Chainlink, Band Protocol)
-  - [ ] Historical data storage và analysis
-  - [ ] Interactive charts và analytics
+  - [ ] Historical data storage and analysis
+  - [ ] Interactive charts and analytics
   - [ ] Performance metrics dashboard
   - [ ] Portfolio analytics tools
 
@@ -175,9 +175,9 @@ A comprehensive marketplace for tokenizing, trading, and managing Real World Ass
   - [ ] Discussion forums
   - [ ] Educational content platform
 
-## 🛠️ Cách Chạy Project (Setup Hiện Tại)
+## 🛠️ How to Run the Project (Current Setup)
 
-### Yêu Cầu Hệ Thống
+### System Requirements
 ```bash
 Node.js 18+
 PostgreSQL 13+
@@ -197,64 +197,64 @@ pnpm install
 
 # 3. Setup environment variables
 cp .env.example .env.local
-# Chỉnh sửa .env.local với thông tin thực tế của bạn
+# Edit .env.local with your actual information
 
 # 4. Setup PostgreSQL database
-# Tạo database mới
+# Create a new database
 createdb rwa_marketplace
 
 # 5. Run database migrations
 pnpm prisma migrate dev
 pnpm prisma generate
 
-# 6. Seed database với sample data (optional)
+# 6. Seed database with sample data (optional)
 pnpm run db:seed
 
 # 7. Start development server
 pnpm dev
 ```
 
-### ⚠️ Các Vấn Đề Hiện Tại Cần Giải Quyết
+### ⚠️ Current Issues to Be Resolved
 
 <table>
 <tr>
 <td width="50%">
 
 **🔴 Critical Issues**
-- Database connection chưa được setup đúng
-- Privy authentication cần app ID thực tế
-- APIs đang sử dụng mock data
-- Smart contracts chưa được phát triển
-- File upload system chưa hoàn chỉnh
+- Database connection is not set up correctly
+- Privy authentication needs a real app ID
+- APIs are using mock data
+- Smart contracts have not been developed
+- File upload system is incomplete
 
 </td>
 <td width="50%">
 
 **🟡 Important Issues**
-- Payment processing chưa được tích hợp
-- KYC workflow chưa functional
-- Trading engine chưa thực sự hoạt động
-- Vault tracking system chưa complete
-- Real-time price updates chưa có
+- Payment processing is not integrated
+- KYC workflow is not functional
+- Trading engine is not really working
+- Vault tracking system is incomplete
+- No real-time price updates
 
 </td>
 </tr>
 </table>
 
-### 📝 Environment Variables Cần Thiết
+### 📝 Required Environment Variables
 
 ```env
 # Database
 DATABASE_URL=postgresql://user:password@localhost:5432/rwa_marketplace
 
-# Privy Authentication (CẦN APP ID THỰC TẾ)
+# Privy Authentication (NEEDS REAL APP ID)
 NEXT_PRIVY_APP_ID=your-actual-privy-app-id
 
-# Blockchain RPC URLs (CẦN API KEYS THỰC TẾ)
+# Blockchain RPC URLs (NEEDS REAL API KEYS)
 NEXT_ETHEREUM_RPC_URL=https://mainnet.infura.io/v3/YOUR_KEY
 NEXT_POLYGON_RPC_URL=https://polygon-mainnet.infura.io/v3/YOUR_KEY
 
-# Additional services sẽ cần sau này
+# Additional services will be needed later
 CHAINALYSIS_API_KEY=your-key
 JUMIO_API_TOKEN=your-token
 AWS_ACCESS_KEY_ID=your-key
@@ -309,7 +309,7 @@ AWS_ACCESS_KEY_ID=your-key
   </tr>
 </table>
 
-### 🎯 Immediate Next Steps (1-2 tuần tới)
+### 🎯 Immediate Next Steps (Next 1-2 weeks)
 
 <div align="center">
   <img src="https://img.shields.io/badge/Week%201-Database%20Setup-red?style=flat-square" alt="Database Setup" />
@@ -318,11 +318,11 @@ AWS_ACCESS_KEY_ID=your-key
   <img src="https://img.shields.io/badge/Week%202-Testing-blue?style=flat-square" alt="Testing" />
 </div>
 
-### 📈 Success Metrics cho MVP
-- [ ] User có thể đăng ký và đăng nhập thành công
-- [ ] Database connection stable và có thể thao tác CRUD
-- [ ] Asset listing hiển thị dữ liệu thực từ database
-- [ ] Basic profile management hoạt động
+### 📈 Success Metrics for MVP
+- [ ] User can register and log in successfully
+- [ ] Database connection is stable and can perform CRUD operations
+- [ ] Asset listing displays real data from the database
+- [ ] Basic profile management is working
 - [ ] KYC document upload functional (basic level)
 
 ## 🚀 Key Features
@@ -387,7 +387,7 @@ AWS_ACCESS_KEY_ID=your-key
   </table>
 </div>
 
-## � Quick Start
+## 🚀 Quick Start
 
 ### 📋 Prerequisites
 
@@ -529,7 +529,7 @@ docker build -t rwa-marketplace .
 docker run -p 3000:3000 --env-file .env.local rwa-marketplace
 ```
 
-## � User Journeys
+## 🚀 User Journeys
 
 <div align="center">
   <table>
@@ -680,7 +680,7 @@ git push origin feature/amazing-feature
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## � Support & Community
+## 🤝 Support & Community
 
 <div align="center">
   <table>
@@ -785,9 +785,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
     </td>
     <td>
       <img src="https://img.shields.io/badge/Q4%202024-🚀-purple?style=flat-square" alt="Q4 2024" /><br/>
-      � AI asset valuation<br/>
-      � Automated compliance<br/>
-      � Enterprise solutions<br/>
+      🚀 AI asset valuation<br/>
+      🚀 Automated compliance<br/>
+      🚀 Enterprise solutions<br/>
       🚀 Layer 2 scaling<br/>
       🚀 NFT marketplace<br/>
     </td>
